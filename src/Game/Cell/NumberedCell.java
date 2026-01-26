@@ -7,10 +7,12 @@ public class NumberedCell extends Cell {
 
     public NumberedCell(Position pos) {
         super(pos);
+        symbol = "0";
     }
 
     public void increaseBombsAround() {
         bombsAround++;
+        symbol = "" + bombsAround;
     }
 
     public int getBombsAround() {
@@ -21,14 +23,5 @@ public class NumberedCell extends Cell {
     public boolean Reveal() {
         setState(CellState.Revealed);
         return false; // Não papocou!
-    }
-
-    @Override
-    public String toString() {
-        return switch (getState()) {
-            case Revealed -> "[" + bombsAround + "]";
-            case Flagged -> "[🚩]";
-            default -> "[ ]";
-        };
     }
 }

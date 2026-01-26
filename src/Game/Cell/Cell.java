@@ -5,6 +5,7 @@ import Game.Position;
 
 public abstract class Cell extends GameEntity {
     private CellState state = CellState.Hidden;
+    protected String symbol;
 
     public Cell(Position pos) {
         super(pos);
@@ -24,4 +25,13 @@ public abstract class Cell extends GameEntity {
     }
 
     public abstract boolean Reveal();
+
+    @Override
+    public String toString() {
+        return switch (getState()) {
+            case Revealed -> "[" + symbol + "]";
+            case Flagged -> "[P]";
+            default -> "[ ]";
+        };
+    }
 }

@@ -10,6 +10,7 @@ import java.util.Random;
 public class Field { // O campo será sempre um quadrado
     private Cell[][] cells;
     private Random random = new Random();
+    private GameState gameState = GameState.Playing;
 
     public Field(int side) {
         cells = new Cell[side][side];
@@ -21,14 +22,27 @@ public class Field { // O campo será sempre um quadrado
         System.out.println("Campo criado!");
     }
 
-//    public void chooseCell(Position pos) {
-//        var cell = cells[pos.x][pos.y];
-//
-//        var looseGame = cell.Reveal();
-//        if (looseGame) {
-//
-//        }
-//    }
+    public void revealCell(Position pos) {
+        var cell = cells[pos.x][pos.y];
+
+        var looseGame = cell.Reveal(); // Se uma bomba for acionada, Reveal retorna true
+
+        if (looseGame) loose();
+    }
+
+    public void flagCell(Position pos) {
+        cells[pos.x][pos.y].Flag();
+    }
+
+    private void loose() {
+        for (int i = 0; i < cells.length; i++) {
+            for (int j = 0; j < cells[i].length; j++) {
+                if (cells[i][j] instanceof MineCell) cells[i][j].Reveal();
+            }
+        }
+        System.out.println("Você perdeu!");
+        gameState = GameState.GameOver;
+    }
 
     private void randomizeBombs(int bombsQuantity) {
         var currentBombsQuantity = 0;

@@ -5,6 +5,7 @@ import Game.Position;
 public class MineCell extends Cell {
     public MineCell(Position pos) {
         super(pos);
+        symbol = "*";
     }
 
     @Override
@@ -17,7 +18,7 @@ public class MineCell extends Cell {
     public String toString() {
         return switch (getState()) {
             case Revealed -> "[*]";
-            case Flagged -> "[🚩]";
+            case Flagged -> "[P]";
             default -> "[ ]";
         };
     }
