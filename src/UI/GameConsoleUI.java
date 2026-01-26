@@ -1,3 +1,5 @@
+package UI;
+
 import Game.Field.Field;
 import Game.Field.GameState;
 import Game.Position;
@@ -18,7 +20,14 @@ public class GameConsoleUI {
         while (true) {
             showFieldOnConsole();
             chooseCell();
-            if (field.gameState == GameState.GameOver) break;
+            switch (field.gameState) {
+                case GameState.GameOver:
+                    System.out.println("Você perdeu, bluezão troxão :p");
+                    return;
+                case GameState.Win:
+                    System.out.println("Você venceu, seu alexandro :D");
+                    return;
+            }
         }
     }
 

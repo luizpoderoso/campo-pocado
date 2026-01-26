@@ -10,6 +10,7 @@ import java.util.Random;
 
 public class Field { // O campo será sempre um quadrado
     private final Random random = new Random();
+    private int _remainingNumCells;
 
     public int remainingFlags;
     public Cell[][] cells;
@@ -17,10 +18,12 @@ public class Field { // O campo será sempre um quadrado
 
     public Field(int side) {
         cells = new Cell[side][side];
+        _remainingNumCells = side * side;
     }
 
     public Field(int side, int bombsQuantity) {
         cells = new Cell[side][side];
+        _remainingNumCells = (side * side) - bombsQuantity;
         generateField(bombsQuantity);
     }
 
@@ -42,6 +45,7 @@ public class Field { // O campo será sempre um quadrado
             return;
 
         cell.Reveal();
+        _remainingNumCells--;
         var numCell = (NumberedCell) cell;
 
         if (numCell.getBombsAround() == 0) {
@@ -56,6 +60,8 @@ public class Field { // O campo será sempre um quadrado
                 }
             }
         }
+
+        if (_remainingNumCells <= 0) gameState = GameState.Win;
     }
 
     public void flagCell(Position pos) {

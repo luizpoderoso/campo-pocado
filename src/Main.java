@@ -1,12 +1,12 @@
 import Game.Field.Field;
-import Game.Position;
+import UI.GameConsoleUI;
 
 public class Main {
     static void main() {
 //        JFrame frame = new JFrame("Campo Pocado");
 
-        var field = new Field(8, 8);
-        
+        var field = new Field(8, 1);
+
         var console = new GameConsoleUI(field);
         console.run();
 
