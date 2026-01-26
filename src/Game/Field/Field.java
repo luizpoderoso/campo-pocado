@@ -1,11 +1,13 @@
 package Game.Field;
 
 import Game.Cell.Cell;
+import Game.Cell.CellState;
 import Game.Cell.MineCell;
 import Game.Cell.NumberedCell;
 import Game.Position;
 
 import java.util.Random;
+import java.util.function.Function;
 
 public class Field { // O campo será sempre um quadrado
     private Cell[][] cells;
@@ -25,9 +27,29 @@ public class Field { // O campo será sempre um quadrado
     public void revealCell(Position pos) {
         var cell = cells[pos.x][pos.y];
 
-        var looseGame = cell.Reveal(); // Se uma bomba for acionada, Reveal retorna true
+        if (cell instanceof MineCell) {
+            loose();
+            return;
+        }
 
-        if (looseGame) loose();
+        if (cell.getState() == CellState.Revealed)
+            return;
+
+        cell.Reveal();
+        var numCell = (NumberedCell) cell;
+
+        if (numCell.getBombsAround() == 0) {
+            for (int x = cell.pos.x - 1; x < cell.pos.x + 2; x++) {
+                if (x < 0 || x > cells.length - 1) continue;
+
+                for (int y = cell.pos.y - 1; y < cell.pos.y + 2; y++) {
+                    if (y < 0 || y > cells.length - 1) continue;
+                    if (x == cell.pos.x && y == cell.pos.y) continue;
+
+                    revealCell(new Position(x, y));
+                }
+            }
+        }
     }
 
     public void flagCell(Position pos) {
@@ -67,6 +89,7 @@ public class Field { // O campo será sempre um quadrado
 
             for (int y = bombPos.y - 1; y < bombPos.y + 2; y++) {
                 if (y < 0 || y > cells.length - 1) continue;
+
                 if (cells[x][y] instanceof NumberedCell)
                     ((NumberedCell) cells[x][y]).increaseBombsAround();
             }
