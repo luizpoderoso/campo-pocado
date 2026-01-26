@@ -25,6 +25,10 @@ public class NumberedCell extends Cell {
 
     @Override
     public String toString() {
-        return "[" + bombsAround + "]";
+        return switch (getState()) {
+            case Revealed -> "[" + bombsAround + "]";
+            case Flagged -> "[🚩]";
+            default -> "[ ]";
+        };
     }
 }

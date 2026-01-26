@@ -15,6 +15,10 @@ public class MineCell extends Cell {
 
     @Override
     public String toString() {
-        return "[*]";
+        return switch (getState()) {
+            case Revealed -> "[*]";
+            case Flagged -> "[🚩]";
+            default -> "[ ]";
+        };
     }
 }

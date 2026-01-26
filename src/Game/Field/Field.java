@@ -21,6 +21,15 @@ public class Field { // O campo será sempre um quadrado
         System.out.println("Campo criado!");
     }
 
+//    public void chooseCell(Position pos) {
+//        var cell = cells[pos.x][pos.y];
+//
+//        var looseGame = cell.Reveal();
+//        if (looseGame) {
+//
+//        }
+//    }
+
     private void randomizeBombs(int bombsQuantity) {
         var currentBombsQuantity = 0;
 
