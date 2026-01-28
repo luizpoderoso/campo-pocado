@@ -38,6 +38,7 @@ public class Field { // O campo será sempre um quadrado
         var cellState = cell.getState();
 
         if (cell instanceof MineCell) {
+            cell.symbol = "💥";
             loose();
             return;
         }

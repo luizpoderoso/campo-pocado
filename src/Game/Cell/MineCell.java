@@ -5,7 +5,7 @@ import Game.Position;
 public class MineCell extends Cell {
     public MineCell(Position pos) {
         super(pos);
-        symbol = "*";
+        symbol = "💣";
     }
 
     @Override

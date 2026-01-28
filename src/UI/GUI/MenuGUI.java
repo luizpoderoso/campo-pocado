@@ -115,9 +115,9 @@ public class MenuGUI extends JFrame {
 
     private void validateDifficulty(int side, int mines) throws InvalidDifficultyException {
         if (side < 2) throw new InvalidDifficultyException("Campo muito pequeno!");
-        if (side > 50) throw new InvalidDifficultyException("Campo muito grande!");
+        if (side > 40) throw new InvalidDifficultyException("Campo muito grande!");
         if (mines < 1)  throw new InvalidDifficultyException("Quantidade de minas menor que 1!");
-        if (mines > (side * side))  throw new InvalidDifficultyException("Quantidade de minas muito grande!");
+        if (mines >= (side * side))  throw new InvalidDifficultyException("Quantidade de minas muito grande!");
     }
 
     public static void main(String[] args) {

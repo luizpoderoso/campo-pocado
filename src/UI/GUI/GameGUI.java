@@ -1,6 +1,8 @@
 package UI.GUI;
 
+import Game.Cell.Cell;
 import Game.Cell.CellState;
+import Game.Cell.MineCell;
 import Game.Field.Field;
 import Game.Field.GameState;
 import Game.Position;
@@ -18,6 +20,7 @@ public class GameGUI extends JFrame {
     private final JButton[][] buttons;
     private final JLabel labelFlags = new JLabel("Bandeiras: 0");
     private final JLabel labelTimer = new JLabel("Tempo: 0s");
+    private final JButton buttonGiveUp = new JButton("😖");
     private Timer timer;
     private int secondsPassed;
 
@@ -50,6 +53,9 @@ public class GameGUI extends JFrame {
             for (int j = 0; j < cols; j++) {
                 buttons[i][j] = new JButton();
                 buttons[i][j].setPreferredSize(new Dimension(50, 50));
+
+                var fontSize = rows < 20 ? 25 : rows < 25 ? 20 : 15;
+                buttons[i][j].setFont(new Font("Arial", Font.PLAIN, fontSize));
 
                 final int r = i;
                 final int c = j;
