@@ -54,7 +54,7 @@ public class GameGUI extends JFrame {
                 buttons[i][j] = new JButton();
                 buttons[i][j].setPreferredSize(new Dimension(50, 50));
 
-                var fontSize = rows < 20 ? 25 : rows < 25 ? 20 : 15;
+                var fontSize = rows < 25 ? 20 : 15;
                 buttons[i][j].setFont(new Font("Arial", Font.PLAIN, fontSize));
 
                 final int r = i;
